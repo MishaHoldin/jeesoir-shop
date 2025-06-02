@@ -4,7 +4,7 @@
     <section
       class="relative bg-gray-100 sm:h-screen sm:max-h-[720px] min-h-[200px] w-full flex items-center justify-center flex-col py-16 px-4 text-center gap-[6px]"
       :style="{
-        backgroundImage: `url('https://99a6-31-148-20-67.ngrok-free.app${returnData?.banner?.image?.url}')`,
+        backgroundImage: `url('${returnData?.banner?.image?.url}')`,
         backgroundSize: 'cover',
         backgroundPosition: 'top',
       }"
@@ -88,7 +88,7 @@
       <img
         v-for="(img, index) in returnData?.itemBlock?.image"
         :key="index"
-        :src="`https://99a6-31-148-20-67.ngrok-free.app${img.url}`"
+        :src="`${img.url}`"
         alt="item"
         class="w-1/2 sm:h-[400px] h-[185px] object-cover"
       />

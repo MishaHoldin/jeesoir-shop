@@ -8,7 +8,7 @@
           <img
             v-for="(img, index) in product?.images"
             :key="index"
-            :src="`https://99a6-31-148-20-67.ngrok-free.app${img.url}`"
+            :src="`${img.url}`"
             class="cursor-pointer max-w-[100px] max-h-[100px] object-cover w-full h-auto"
             @click="openModal(index)"
           />
@@ -16,7 +16,7 @@
         <!-- Основное изображение -->
         <div class="flex-1 flex justify-center items-start">
           <img
-            :src="`https://99a6-31-148-20-67.ngrok-free.app${product?.images?.[activeImage]?.url}`"
+            :src="`${product?.images?.[activeImage]?.url}`"
             @click="openModal(0)"
             class="max-w-[448px] max-h-[541px] w-full object-cover cursor-pointer"
             alt="product"
@@ -144,7 +144,7 @@
 
         <div class="relative w-full max-w-3xl px-4">
           <img
-            :src="`https://99a6-31-148-20-67.ngrok-free.app${product?.images?.[modalImageIndex]?.url}`"
+            :src="`${product?.images?.[modalImageIndex]?.url}`"
             class="w-full h-auto object-contain max-h-[80vh] mx-auto"
           />
 

@@ -7,7 +7,7 @@
     >
       <div class="flex gap-4 items-start">
         <img
-          :src="`https://99a6-31-148-20-67.ngrok-free.app${item.image}`"
+          :src="`${item.image}`"
           alt=""
           class="w-[95px] h-[110px] object-cover"
         />

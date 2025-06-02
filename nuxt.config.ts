@@ -20,13 +20,13 @@ export default defineNuxtConfig({
   },
   runtimeConfig: {
     public: {
-      graphqlEndpoint: 'https://99a6-31-148-20-67.ngrok-free.app/graphql',
+      graphqlEndpoint: 'https://lovely-dinosaurs-e33bc56888.strapiapp.com/graphql',
     },
   },
   apollo: {
     clients: {
       default: {
-        httpEndpoint: 'https://99a6-31-148-20-67.ngrok-free.app/graphql',
+        httpEndpoint: 'https://lovely-dinosaurs-e33bc56888.strapiapp.com/graphql',
       },
     },
     // для SSR:
@@ -41,7 +41,7 @@ export default defineNuxtConfig({
   },
   image: {
     strapi: {
-      baseURL: `https://99a6-31-148-20-67.ngrok-free.app`,
+      baseURL: ``,
     },
   },
 })
