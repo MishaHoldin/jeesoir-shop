@@ -32,7 +32,7 @@
           За потреби ви можете змінити ці налаштування у своєму браузері.
         </p>
 
-        <div class="flex flex-col md:flex-row gap-[17px] justify-center">
+        <div class="flex flex-row gap-[17px] justify-center">
           <button
             class="w-full h-[73px] border border-[#102840] text-[16px] font-light leading-[160%]"
             @click="reject"
