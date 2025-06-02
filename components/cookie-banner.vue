@@ -5,7 +5,7 @@
       class="fixed inset-0 bg-black/50 flex items-center justify-center z-50"
     >
       <div
-        class="bg-white py-[50px] px-[85px] max-w-[600px] w-full mx-4 text-[#252525] relative"
+        class="bg-white py-[50px] sm:px-[85px] px-[25px] max-w-[600px] w-full mx-4 text-[#252525] relative"
       >
         <button
           class="absolute top-5 right-5"
@@ -15,19 +15,19 @@
           <img src="/x.svg" alt="Close" class="w-6 h-6" />
         </button>
 
-        <h2 class="text-[32px] text-center font-light mb-[21px]">Cookies</h2>
-        <p class="text-[20px] font-light leading-[160%] mb-[27px]">
+        <h2 class="sm:text-[32px] text-[24px] text-center font-light mb-[21px]">Cookies</h2>
+        <p class="sm:text-[20px] text-[16px] font-light leading-[160%] mb-[27px]">
           Сайт Jeesoir використовує файли cookies для забезпечення коректної роботи,
           зручності користування та аналітики відвідуваності.
         </p>
 
-        <ul class="list-disc pl-5 text-[16px] font-light leading-[160%] space-y-2 mb-6">
+        <ul class="list-disc pl-5 sm:text-[16px] text-[14px] font-light leading-[160%] space-y-2 mb-6">
           <li>зберігати вибрані вами налаштування (наприклад, мову або валюту);</li>
           <li>покращувати функціональність сайту;</li>
           <li>аналізувати взаємодію з контентом і вдосконалювати сервіс.</li>
         </ul>
 
-        <p class="text-[20px] font-light leading-[160%] mb-8">
+        <p class="sm:text-[20px] text-[16px] font-light leading-[160%] mb-8">
           Продовжуючи користування сайтом, ви погоджуєтеся на використання файлів cookies.
           За потреби ви можете змінити ці налаштування у своєму браузері.
         </p>
