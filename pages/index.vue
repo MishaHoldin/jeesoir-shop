@@ -13,12 +13,12 @@
         <h1 class="font-bold sm:text-[46px] text-[20px] text-center text-white">
           {{ returnData?.banner?.Title }}
         </h1>
-        <NuxtLink
+        <router-link
           :to="returnData?.banner?.btnLink"
           class="font-medium sm:text-[16px] text-[10px] uppercase text-end text-white new_block"
         >
           {{ returnData?.banner?.btnText }}
-        </NuxtLink>
+        </router-link>
       </div>
     </section>
 
@@ -77,10 +77,10 @@
       <div
         class="font-light max-w-[200px] mt-[70px] mx-auto w-full sm:text-[16px] text-[15px] uppercase text-center text-[#102840] border-[#102840] border-[0.5px] sm:py-4 py-[9px] px-0 mb-[20px]"
       >
-        <NuxtLink
+        <router-link
           to="/market"
           class="font-light w-full text-[16px] uppercase text-center text-[#102840] py-4 px-0 mb-[20px]"
-          >Детальніше</NuxtLink
+          >Детальніше</router-link
         >
       </div>
     </section>

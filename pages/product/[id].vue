@@ -2,37 +2,92 @@
   <div class="bg-white max-w-[1440px] w-full mx-auto px-4 py-12 text-[#252525]">
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
       <!-- ГАЛЕРЕЯ -->
-      <div class="flex flex-col lg:flex-row gap-4">
-        <!-- Превью -->
-        <div class="flex lg:flex-col gap-2 w-full max-w-[80px] shrink-0">
-          <img
-            v-for="(img, index) in product?.images"
-            :key="index"
-            :src="`${img.url}`"
-            class="cursor-pointer max-w-[100px] max-h-[100px] object-cover w-full h-auto"
-            @click="openModal(index)"
-          />
+      <div class="flex justify-between gap-[20px]">
+        <div class="flex sm:flex-col flex-col-reverse lg:flex-row gap-4">
+          <!-- Превью -->
+          <div class="flex lg:flex-col gap-2 w-full max-w-[80px] shrink-0">
+            <img
+              v-for="(img, index) in product?.images"
+              :key="index"
+              :src="`${img.url}`"
+              class="cursor-pointer max-w-[100px] max-h-[100px] object-cover w-full h-auto"
+              @click="openModal(index)"
+            />
+          </div>
+          <!-- Основное изображение -->
+          <div class="flex-1 flex justify-center items-start">
+            <img
+              :src="`${product?.images?.[activeImage]?.url}`"
+              @click="openModal(0)"
+              class="sm:max-w-[448px] max-w-[448px] sm:max-h-[160px] max-h-[240px] w-full object-cover cursor-pointer"
+              alt="product"
+            />
+          </div>
         </div>
-        <!-- Основное изображение -->
-        <div class="flex-1 flex justify-center items-start">
-          <img
-            :src="`${product?.images?.[activeImage]?.url}`"
-            @click="openModal(0)"
-            class="max-w-[448px] max-h-[541px] w-full object-cover cursor-pointer"
-            alt="product"
-          />
+        <div class="flex flex-col">
+          <h1
+            class="font-light sm:hidden flex text-[20px] text-start text-[#252525] sm:mb-5 mb-[12px]"
+          >
+            {{ product?.Name }}
+          </h1>
+          <div class="font-bold sm:hidden flex text-[16px] text-[#252525] mb-4">
+            {{ product?.price }} €
+          </div>
+          <div
+            class="sm:hidden flex flex-col sm:gap-[16px] gap-[10px] sm:mb-[30px] mb-[15px]"
+          >
+            <div
+              class="w-[32px] h-[32px] rounded-full border border-[#252525] flex flex-col items-center justify-center"
+            >
+              <div
+                class="w-[24px] h-[24px] rounded-full"
+                :style="{ backgroundColor: product?.color.color }"
+              ></div>
+            </div>
+            <div class="font-light text-[14px] text-[#252525]">
+              Колір: {{ product?.color.Name || "Синій" }}
+            </div>
+          </div>
+
+          <!-- Размеры -->
+          <div class="mb-[34px] sm:hidden block">
+            <button
+              @click="sizeChartOpen = true"
+              class="font-extralight text-[20px] underline decoration-[#252525] decoration-1 underline-offset-0 text-[#252525] sm:mb-[22px] mb-[8px]"
+            >
+              Розмірна сітка
+            </button>
+
+            <div class="flex gap-2">
+              <button
+                v-for="size in product?.sizes"
+                :key="size.Name"
+                @click="selectedSize = size.Name"
+                :class="[
+                  'px-4 py-2 text-sm font-[300] text-center border',
+                  selectedSize === size.Name
+                    ? 'bg-black text-white border-black'
+                    : 'bg-[#d9d9d9] text-[#4d4d4d] hover:bg-gray-100',
+                ]"
+              >
+                {{ size.Name }}
+              </button>
+            </div>
+          </div>
         </div>
       </div>
 
       <!-- ИНФОРМАЦИЯ -->
-      <div>
-        <h1 class="font-light text-[20px] text-start text-[#252525] mb-5">
+      <div class="">
+        <h1
+          class="font-light sm:flex hidden text-[20px] text-start text-[#252525] mb-5"
+        >
           {{ product?.Name }}
         </h1>
-        <div class="font-bold text-[16px] text-[#252525] mb-4">
+        <div class="font-bold sm:flex hidden text-[16px] text-[#252525] mb-4">
           {{ product?.price }} €
         </div>
-        <div class="flex flex-col gap-[16px] mb-[30px]">
+        <div class="sm:flex hidden flex-col gap-[16px] mb-[30px]">
           <div
             class="w-[32px] h-[32px] rounded-full border border-[#252525] flex flex-col items-center justify-center"
           >
@@ -47,7 +102,7 @@
         </div>
 
         <!-- Размеры -->
-        <div class="mb-[34px]">
+        <div class="mb-[34px] sm:block hidden">
           <button
             @click="sizeChartOpen = true"
             class="font-extralight text-[20px] underline decoration-[#252525] decoration-1 underline-offset-0 text-[#252525] mb-[22px]"
@@ -73,7 +128,7 @@
         </div>
 
         <!-- Кнопки -->
-        <div class="flex gap-5 mb-[45px]">
+        <div class="flex sm:flex-row flex-col gap-5 mb-[45px]">
           <button
             @click="handleAddToCart()"
             class="border border-[#102840] border-[0.5px] px-[81px] pt-[16px] pb-[17px] font-light text-[16px] uppercase text-center text-[#102840] w-full"
@@ -86,7 +141,11 @@
             В ОБРАНЕ
           </button>
         </div>
-
+        <router-link
+          to="/market"
+          class="font-light text-base underline [text-decoration-skip-ink:none] text-center text-[#252525] my-[30px] block sm:hidden"
+          >Повернутися до каталогу
+        </router-link>
         <!-- Подробиці -->
         <div>
           <h2 class="font-light text-[16px] text-[#252525]">Подробиці</h2>
@@ -124,10 +183,10 @@
           </details>
         </div>
       </div>
-      <NuxtLink
+      <router-link
         to="/market"
-        class="block mt-6 font-light text-[24px] underline text-[#252525]"
-        >Повернутися до каталогу</NuxtLink
+        class="sm:block mt-6 font-light text-[24px] underline text-[#252525] hidden"
+        >Повернутися до каталогу</router-link
       >
 
       <!-- Галерея-модалка -->

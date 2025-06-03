@@ -9,24 +9,24 @@
       </button>
 
       <!-- Логотип -->
-      <NuxtLink to="/">
+      <router-link to="/">
         <img class="w-full sm:max-w-[161px] max-w-[88px] h-auto" alt="logo" src="/logo.svg" />
-      </NuxtLink>
+      </router-link>
 
       <!-- Иконки -->
       <div class="flex items-center sm:gap-[30px] gap-[10px]">
-        <NuxtLink to="/">
+        <router-link to="/">
           <img alt="search" src="/search.svg" class="sm:w-6 sm:h-6 w-3 h-3" />
-        </NuxtLink>
-        <NuxtLink to="/">
+        </router-link>
+        <router-link to="/">
           <img alt="profile" src="/profile.svg" class="sm:w-6 sm:h-6 w-3 h-3" />
-        </NuxtLink>
-        <NuxtLink to="/">
+        </router-link>
+        <router-link to="/">
           <img alt="heart" src="/heart.svg" class="sm:w-6 sm:h-6 w-3 h-3" />
-        </NuxtLink>
-        <NuxtLink to="/cart">
+        </router-link>
+        <router-link to="/cart">
           <img alt="cart" src="/cart.svg" class="sm:w-6 sm:h-6 w-3 h-3" />
-        </NuxtLink>
+        </router-link>
         
       </div>
     </div>
@@ -55,22 +55,22 @@
         <!-- Меню -->
         <nav class="flex flex-col gap-3 sm:text-[24px] text-[16px] font-light leading-none">
           <!-- Текущая страница выделена чёрным -->
-          <NuxtLink
+          <router-link
             to="/"
             class="text-[#252525]"
             @click="closeMenu"
-          >Головна</NuxtLink>
+          >Головна</router-link>
 
-          <NuxtLink to="/market" class="text-[#797979] hover:text-[#252525]" @click="closeMenu">Каталог</NuxtLink>
+          <router-link to="/market" class="text-[#797979] hover:text-[#252525]" @click="closeMenu">Каталог</router-link>
 
           <!-- Разделитель -->
           <hr class="my-4 w-[95px] h-[1px] bg-[#797979] border-none" />
 
-          <NuxtLink to="/cart" class="text-[#797979] hover:text-[#252525]" @click="closeMenu">Кошик</NuxtLink>
-          <NuxtLink to="" class="text-[#797979] hover:text-[#252525]" @click="closeMenu">Обране</NuxtLink>
-          <NuxtLink to="" class="text-[#797979] hover:text-[#252525]" @click="closeMenu">Замовлення</NuxtLink>
-          <NuxtLink to="/return" class="text-[#797979] hover:text-[#252525]" @click="closeMenu">Повернення</NuxtLink>
-          <NuxtLink to="" class="text-[#797979] hover:text-[#252525]" @click="closeMenu">Про нас</NuxtLink>
+          <router-link to="/cart" class="text-[#797979] hover:text-[#252525]" @click="closeMenu">Кошик</router-link>
+          <router-link to="" class="text-[#797979] hover:text-[#252525]" @click="closeMenu">Обране</router-link>
+          <router-link to="" class="text-[#797979] hover:text-[#252525]" @click="closeMenu">Замовлення</router-link>
+          <router-link to="/return" class="text-[#797979] hover:text-[#252525]" @click="closeMenu">Повернення</router-link>
+          <router-link to="" class="text-[#797979] hover:text-[#252525]" @click="closeMenu">Про нас</router-link>
         </nav>
       </aside>
     </transition>
