@@ -52,7 +52,7 @@
 </template>
 
 <script setup>
-import { useCookieStore } from '@/stores/cookie'
+import { useCookieStore } from '~/stores/cookie'
 
 const cookieStore = useCookieStore()
 const readyToShow = ref(false)

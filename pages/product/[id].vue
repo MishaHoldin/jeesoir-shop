@@ -319,7 +319,6 @@
 </template>
 
 <script setup>
-import { useRoute } from "vue-router";
 import { getProduct } from "~/queries/market";
 
 const route = useRoute();
