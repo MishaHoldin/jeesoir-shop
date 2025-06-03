@@ -1,9 +1,10 @@
 <template>
   <div class="bg-white max-w-[1440px] w-full mx-auto px-4 py-12 text-[#252525]">
+    
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
       <!-- ГАЛЕРЕЯ -->
-      <div class="flex justify-between gap-[20px]">
-        <div class="flex sm:flex-col flex-col-reverse lg:flex-row gap-4">
+      <div class="sm:flex grid grid-cols-2 justify-between gap-[20px]">
+        <div class="flex sm:flex-col flex-col-reverse lg:flex-row gap-4 w-full">
           <!-- Превью -->
           <div class="flex lg:flex-col gap-2 w-full max-w-[80px] shrink-0">
             <img
@@ -15,16 +16,18 @@
             />
           </div>
           <!-- Основное изображение -->
-          <div class="flex-1 flex justify-center items-start">
+          <div class="flex-1 flex  items-start">
             <img
               :src="`${product?.images?.[activeImage]?.url}`"
               @click="openModal(0)"
-              class="sm:max-w-[448px] max-w-[448px] sm:max-h-[160px] max-h-[240px] w-full object-cover cursor-pointer"
+              class="
+              sm:max-w-[448px]  min-w-[160px] sm:max-h-[541px] h-auto min-h-[240px] 
+              w-full object-cover cursor-pointer"
               alt="product"
             />
           </div>
         </div>
-        <div class="flex flex-col">
+        <div class="sm:hidden flex flex-col min-w-[120px]">
           <h1
             class="font-light sm:hidden flex text-[20px] text-start text-[#252525] sm:mb-5 mb-[12px]"
           >
@@ -58,7 +61,7 @@
               Розмірна сітка
             </button>
 
-            <div class="flex gap-2">
+            <div class="flex gap-2 flex-wrap">
               <button
                 v-for="size in product?.sizes"
                 :key="size.Name"
@@ -152,10 +155,10 @@
           <details
             v-for="(item, index) in items"
             :key="index"
-            class="border-b border-[#252525]/30 group"
+            class="border-b border-[#252525]/30 group appearance-none marker:hidden"
           >
             <summary
-              class="flex justify-between items-center cursor-pointer pt-5 pb-[10px] font-light text-[16px] text-[#252525] font-sans"
+              class="flex justify-between items-center  pt-5 pb-[10px] font-light text-[16px] text-[#252525] font-sans list-none marker:hidden cursor-pointer"
             >
               {{ item.title }}
               <span
@@ -207,7 +210,6 @@
             class="w-full h-auto object-contain max-h-[80vh] mx-auto"
           />
 
-          <!-- Навигация -->
           <button
             @click="prevImage"
             class="absolute left-0 top-1/2 transform -translate-y-1/2 px-4 text-white text-3xl"

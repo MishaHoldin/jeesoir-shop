@@ -29,15 +29,6 @@ export default defineNuxtConfig({
         httpEndpoint: 'https://lovely-dinosaurs-e33bc56888.strapiapp.com/graphql',
       },
     },
-    // для SSR:
-    defaultOptions: {
-      watchQuery: {
-        fetchPolicy: 'cache-and-network',
-      },
-      query: {
-        fetchPolicy: 'network-only',
-      },
-    },
   },
   image: {
     strapi: {
