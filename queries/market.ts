@@ -1,6 +1,6 @@
 const products = gql`
-query {
-  products(filters: {}, pagination: { limit: 20 }, sort: []) {
+query($filters: ProductFiltersInput) {
+  products(filters: $filters, pagination: { limit: 20 }, sort: []) {
     documentId
     images {
       url
@@ -13,6 +13,7 @@ query {
   }
 }
 `;
+
 const getProduct = gql`
 query($documentId: ID!)
 {

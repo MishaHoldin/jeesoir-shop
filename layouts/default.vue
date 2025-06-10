@@ -1,6 +1,6 @@
 <!-- layouts/default.vue -->
 <template>
-  <div class="flex flex-col min-h-screen">
+  <div class="flex flex-col min-h-screen justify-between">
     <Header />
     <NuxtPage />
     <CookieBanner />

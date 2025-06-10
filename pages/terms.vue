@@ -5,20 +5,19 @@
 </template>
 
 <script setup>
-import { termsPolicy } from '~/queries/policy'
+import { termsPolicy } from "~/queries/policy";
 
-const returnData = ref('')
+const returnData = ref("");
 
 onMounted(async () => {
-  const { data } = await useAsyncQuery(termsPolicy)
-  returnData.value = data?.value?.term?.Text || ''
-})
+  const { data } = await useAsyncQuery(termsPolicy);
+  returnData.value = data?.value?.term?.Text || "";
+});
 </script>
-
 
 <style lang="scss">
 .terms-page {
-  font-family: var(--font-family);
+  font-family: "raleway";
   color: #000;
 
   h1 {

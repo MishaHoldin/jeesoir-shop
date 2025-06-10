@@ -37,7 +37,7 @@
             Реєстрація
           </button>
         </div>
-        <button class="btn-style mb-4">Увійти</button>
+        <button class="btn-style mb-4" @click="handleLogin">Увійти</button>
         <button
           class="btn-style flex items-center justify-center mx-auto gap-2"
         >
@@ -49,12 +49,14 @@
       <template v-else-if="step === 'register'">
         <h2 class="text-[20px] font-light text-[#252525] mb-8">Реєстрація</h2>
         <input
+          v-model="email"
           type="email"
           placeholder="Ваш e-mail*"
           class="input-style mb-4"
         />
         <div class="relative mb-4">
           <input
+            v-model="password"
             :type="showPassword ? 'text' : 'password'"
             placeholder="Ваш пароль*"
             class="input-style"
@@ -66,7 +68,7 @@
             <img src="/eye.svg" alt="eye" />
           </button>
         </div>
-        <button class="btn-style mb-4" @click="step = 'confirm'">
+        <button class="btn-style mb-4" @click="handleRegister" >
           Продовжити
         </button>
         <button
@@ -104,15 +106,78 @@
 </template>
 
 <script setup>
-const step = ref("login"); // 'login', 'register', 'confirm', 'success'
-const showPassword = ref(false);
+import { LOGIN_MUTATION, REGISTER_MUTATION } from '~/queries/me'
+
+const step = ref('login') // 'login' | 'register' | 'confirm' | 'success'
+const showPassword = ref(false)
+
+const email = ref('')
+const password = ref('')
+// ✅ username нужен для регистрации — будем использовать email как username
+const username = computed(() => email.value.trim())
+
+// -----------------------------
+// LOGIN
+// -----------------------------
+const {
+  mutate: login,
+  onDone: onLoginDone,
+  loading: loginLoading,
+  error: loginError
+} = useMutation(LOGIN_MUTATION)
+
+onLoginDone(({ data }) => {
+  const jwt = data?.login?.jwt
+  if (jwt) {
+    localStorage.setItem('token', jwt)
+    console.log('✅ Login successful:', data.login.user)
+    step.value = 'success'
+  }
+})
+
+// -----------------------------
+// REGISTER
+// -----------------------------
+const {
+  mutate: register,
+  onDone: onRegisterDone,
+  loading: registerLoading,
+  error: registerError
+} = useMutation(REGISTER_MUTATION)
+
+onRegisterDone(({ data }) => {
+  const jwt = data?.register?.jwt
+  if (jwt) {
+    localStorage.setItem('token', jwt)
+    console.log('✅ Registered:', data.register.user)
+    step.value = 'success'
+  }
+})
+
+// -----------------------------
+// ACTIONS
+// -----------------------------
+const handleLogin = () => {
+  if (!email.value || !password.value) return
+  login({ identifier: email.value, password: password.value })
+}
+
+const handleRegister = () => {
+  if (!email.value || !password.value) return
+  register({
+    email: email.value,
+    password: password.value,
+    username: username.value // ⚠️ обязательно передавать!
+  })
+}
 </script>
 
 <style scoped>
 .input-style {
-  @apply w-full max-w-[400px] h-[50px] border border-[#252525] border-[0.5px] px-4 text-[#252525] font-light text-[16px];
+  @apply w-full max-w-[400px] h-[50px] border border-[#252525] border-[0.5px] px-4 text-[#252525] font-light text-[16px] ;
 }
 .btn-style {
-  @apply w-full max-w-[400px] h-[50px] border border-[#102840] border-[0.5px] text-[#102840] text-[16px] font-light uppercase;
+  @apply w-full max-w-[400px] h-[50px] border border-[#102840] border-[0.5px] text-[#102840] text-[16px] font-light uppercase hover:bg-[#102840] hover:text-white active:bg-[#6d849a] active:text-white
+  ;
 }
 </style>

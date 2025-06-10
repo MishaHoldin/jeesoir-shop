@@ -1,6 +1,6 @@
 <template>
   <div
-    class="bg-white text-gray-900 px-4 pt-10 pb-24 max-w-[1440px] w-full mx-auto"
+    class="bg-white text-gray-900 px-4 pt-10 pb-24 max-w-[960px] w-full mx-auto"
   >
     <div class="flex gap-[26px] mb-[40px]">
       <h2 class="font-light text-[16px] text-[#252525]">

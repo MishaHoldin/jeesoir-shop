@@ -35,6 +35,46 @@ query
         url
       }
     }
+    swiperItems2 {
+      id
+      Title
+      products(filters: {}, pagination: {limit: 20}, sort: []){
+        documentId
+        images{
+          url
+        }
+        sizes{
+          Name
+        }
+        Name
+        price
+      }
+      btnText
+      btnLink
+    }
+    images {
+      id
+      image{
+        url
+      }
+    }
+    swiperItems3 {
+      id
+      Title
+      products(filters: {}, pagination: {limit: 20}, sort: []){
+        documentId
+        images{
+          url
+        }
+        sizes{
+          Name
+        }
+        Name
+        price
+      }
+      btnText
+      btnLink
+    }
   }
 }
 `;

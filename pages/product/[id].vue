@@ -134,12 +134,12 @@
         <div class="flex sm:flex-row flex-col gap-5 mb-[45px]">
           <button
             @click="handleAddToCart()"
-            class="border border-[#102840] border-[0.5px] px-[81px] pt-[16px] pb-[17px] font-light text-[16px] uppercase text-center text-[#102840] w-full"
+            class="border border-[#102840] border-[0.5px] px-[81px] pt-[16px] pb-[17px] font-light text-[16px] uppercase text-center text-[#102840] w-full hover:bg-[#102840] hover:text-white active:bg-[#6d849a] active:text-white"
           >
             У КОШИК
           </button>
           <button
-            class="border border-[#102840] border-[0.5px] px-[81px] pt-[16px] pb-[17px] font-light text-[16px] uppercase text-center text-[#102840] w-full"
+            class="border border-[#102840] border-[0.5px] px-[81px] pt-[16px] pb-[17px] font-light text-[16px] uppercase text-center text-[#102840] w-full hover:bg-[#102840] hover:text-white active:bg-[#6d849a] active:text-white"
           >
             В ОБРАНЕ
           </button>
@@ -188,7 +188,7 @@
       </div>
       <router-link
         to="/market"
-        class="sm:block mt-6 font-light text-[24px] underline text-[#252525] hidden"
+        class="sm:block mt-6 font-light text-[24px] underline text-[#252525] hidden font-raleway"
         >Повернутися до каталогу</router-link
       >
 
@@ -227,7 +227,7 @@
     </div>
     <section
       class="sm:py-[130px] py-[35px] px-4 max-w-[1440px] mx-auto"
-      v-if="product?.same_product"
+      v-show="product?.same_product"
     >
       <h2 class="font-[300] text-[20px] pb-[50px] text-start text-[#252525]">
         Вам може сподобатися

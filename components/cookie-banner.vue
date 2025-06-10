@@ -34,13 +34,15 @@
 
         <div class="flex flex-row gap-[17px] justify-center">
           <button
-            class="w-full h-[73px] border border-[#102840] text-[16px] font-light leading-[160%]"
+            class="w-full h-[73px] border border-[#102840] text-[16px] font-light leading-[160%] hover:bg-[#102840] hover:text-white active:bg-[#6d849a] active:text-white
+"
             @click="reject"
           >
             Відхилити
           </button>
           <button
-            class="w-full h-[73px] border border-[#102840] text-[16px] font-light leading-[160%]"
+            class="w-full h-[73px] border border-[#102840] text-[16px] font-light leading-[160%] hover:bg-[#102840] hover:text-white active:bg-[#6d849a] active:text-white
+"
             @click="accept"
           >
             Прийняти

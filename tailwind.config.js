@@ -18,6 +18,9 @@ export default {
      },
 
    },
+   fontFamily: {
+    raleway: ['Raleway'],
+  },
  },
  plugins: [],
 }

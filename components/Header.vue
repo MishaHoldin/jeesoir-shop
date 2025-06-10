@@ -9,19 +9,87 @@
       </button>
 
       <!-- Логотип -->
-      <router-link to="/">
-        <img class="w-full sm:max-w-[161px] max-w-[88px] h-auto" alt="logo" src="/logo.svg" />
+      <router-link to="/" class="flex">
+        <img class="w-full sm:max-w-[161px] max-w-[88px] h-auto sm:ml-[100%]" alt="logo" src="/logo.svg" />
       </router-link>
 
-      <!-- Иконки -->
-      <div class="flex items-center sm:gap-[30px] gap-[10px]">
-        <router-link to="/">
+      <transition name="fade">
+        <div v-if="showSearch" class="absolute top-0 left-0 w-full bg-white z-40 border-b border-gray-200">
+          <div class="max-w-[1440px] mx-auto px-4 h-[72px] flex items-center justify-between">
+            <!-- Бургер -->
+            <button @click="toggleMenu">
+              <img src="/burger.svg" alt="Menu" width="24" />
+            </button>
+      
+            <!-- Поисковая форма -->
+            
+            <!-- Иконки -->
+            <div class="flex w-full items-center justify-end gap-4">
+              <div class="flex flex-grow max-w-[700px] sm:mx-4 sm:ml-0 ml-[10px] border border-gray-300">
+                <div class="sm:flex hidden items-center px-3">
+                  <img src="/search.svg" alt="search" class="w-4 h-4" />
+                </div>
+                <input
+                  v-model="searchQuery"
+                  type="text"
+                  placeholder="Пошук..."
+                  class="flex-grow py-2 px-2 font-light text-[18px] text-[#252525] outline-none w-full"
+                />
+                <button class="bg-[#102840] font-light text-[18px] text-white px-4 py-2 sm:max-w-[120px] max-w-[90px] w-full">
+                  Пошук
+                </button>
+              </div>
+              <img alt="profile" src="/profile.svg" class="w-5 h-5" />
+              <img alt="heart" src="/heart.svg" class="w-5 h-5" />
+              <router-link to="/cart">
+                <img alt="cart" src="/cart.svg" class="w-5 h-5" />
+              </router-link>
+            </div>
+          </div>
+        </div>
+      </transition>
+      
+
+
+<!-- Иконки -->
+<div class="flex items-center sm:gap-[30px] gap-[10px]">
+        <div class="relative ml-[80px]">
+          <button
+            @click="toggleCurrencyDropdown"
+            class="flex items-center gap-1 font-light text-[18px] text-[#252525] pb-[2px]"
+          >
+            {{ currencyStore.selectedCurrency }}
+            <img
+              src="/arrow-down.svg"
+              alt="dropdown"
+              class="w-3 h-3 transition-transform duration-300"
+              :class="{ 'rotate-180': showCurrencyDropdown }"
+            />
+          </button>
+        
+          <ul
+            v-if="showCurrencyDropdown"
+            class="absolute left-0 bg-white shadow border mt-2 w-16 z-50"
+          >
+            <li
+              v-for="curr in currencies.filter(c => c !== currencyStore.selectedCurrency)"
+              :key="curr"
+              @click="selectCurrency(curr)"
+              class="px-2 py-1 cursor-pointer text-center font-light text-[18px] text-[#252525] border-b border-[#102840]"
+            >
+              {{ curr }}
+            </li>
+          </ul>
+        </div>
+        
+        
+        <button @click="toggleSearchBar">
           <img alt="search" src="/search.svg" class="sm:w-6 sm:h-6 w-3 h-3" />
-        </router-link>
+        </button>
         <router-link to="/">
           <img alt="profile" src="/profile.svg" class="sm:w-6 sm:h-6 w-3 h-3" />
         </router-link>
-        <router-link to="/">
+        <router-link to="/wishlist">
           <img alt="heart" src="/heart.svg" class="sm:w-6 sm:h-6 w-3 h-3" />
         </router-link>
         <router-link to="/cart">
@@ -67,10 +135,10 @@
           <hr class="my-4 w-[95px] h-[1px] bg-[#797979] border-none" />
 
           <router-link to="/cart" class="text-[#797979] hover:text-[#252525]" @click="closeMenu">Кошик</router-link>
-          <router-link to="" class="text-[#797979] hover:text-[#252525]" @click="closeMenu">Обране</router-link>
-          <router-link to="" class="text-[#797979] hover:text-[#252525]" @click="closeMenu">Замовлення</router-link>
+          <router-link to="/wishlist" class="text-[#797979] hover:text-[#252525]" @click="closeMenu">Обране</router-link>
+          <router-link to="/" class="text-[#797979] hover:text-[#252525]" @click="closeMenu">Замовлення</router-link>
           <router-link to="/return" class="text-[#797979] hover:text-[#252525]" @click="closeMenu">Повернення</router-link>
-          <router-link to="" class="text-[#797979] hover:text-[#252525]" @click="closeMenu">Про нас</router-link>
+          <router-link to="/" class="text-[#797979] hover:text-[#252525]" @click="closeMenu">Про нас</router-link>
         </nav>
       </aside>
     </transition>
@@ -82,6 +150,22 @@
 
 <script setup>
 const menuOpen = ref(false);
+const currencyStore = useCurrencyStore()
+const showCurrencyDropdown = ref(false)
+const loginModalOpen = ref(false)
+
+const showSearch = ref(false)
+const searchQuery = ref('')
+const currencies = ['UAH', 'USD', 'EUR']
+
+function toggleCurrencyDropdown() {
+  showCurrencyDropdown.value = !showCurrencyDropdown.value
+}
+
+function selectCurrency(curr) {
+  currencyStore.setCurrency(curr)
+  showCurrencyDropdown.value = false
+}
 
 function toggleMenu() {
   menuOpen.value = !menuOpen.value;
@@ -91,7 +175,11 @@ function closeMenu() {
   menuOpen.value = false;
 }
 
-const loginModalOpen = ref(false)
+
+
+function toggleSearchBar() {
+  showSearch.value = !showSearch.value
+}
 
 
 </script>

@@ -22,3 +22,7 @@
 summary::-webkit-details-marker {
   display: none;
 }
+body {
+  @apply font-raleway;
+}
+

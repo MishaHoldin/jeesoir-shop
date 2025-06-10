@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-white text-gray-900 font-sans">
+  <div class="bg-white text-gray-900">
     <!-- HERO BLOCK -->
     <section
       class="relative bg-gray-100 sm:h-screen sm:max-h-[720px] min-h-[200px] w-full flex items-center justify-center flex-col py-16 px-4 text-center gap-[6px]"
@@ -9,7 +9,11 @@
         backgroundPosition: 'top',
       }"
     >
-      <div class="flex flex-col">
+      <!-- Затемняющий оверлей -->
+      <div class="absolute inset-0 bg-black/40 z-0"></div>
+    
+      <!-- Контент -->
+      <div class="flex flex-col z-10">
         <h1 class="font-bold sm:text-[46px] text-[20px] text-center text-white">
           {{ returnData?.banner?.Title }}
         </h1>
@@ -20,7 +24,8 @@
           {{ returnData?.banner?.btnText }}
         </router-link>
       </div>
-    </section>
+  </section>
+  
 
     <!-- КОЛЕКЦІЯ 2024 -->
     <section class="sm:py-[90px] py-[35px] px-4 max-w-6xl mx-auto">
@@ -62,12 +67,12 @@
         <!-- Стрелки -->
         <div class="swiper-pagination sm:hidden" />
         <button
-          class="custom-prev absolute ml:flex hidden top-1/2 left-[-25px] z-10 -translate-y-1/2"
+          class="custom-prev absolute ml:flex hidden top-[40%] left-[-25px] z-10 -translate-y-1/2"
         >
           <img src="/prev.svg" alt="prev" />
         </button>
         <button
-          class="custom-next absolute ml:flex hidden top-1/2 right-[-25px] z-10 -translate-y-1/2"
+          class="custom-next absolute ml:flex hidden top-[40%] right-[-25px] z-10 -translate-y-1/2"
         >
           <img src="/next.svg" alt="next" />
         </button>
@@ -75,11 +80,11 @@
 
       <!-- Кнопка -->
       <div
-        class="font-light max-w-[200px] mt-[70px] mx-auto w-full sm:text-[16px] text-[15px] uppercase text-center text-[#102840] border-[#102840] border-[0.5px] sm:py-4 py-[9px] px-0 mb-[20px]"
+        class="font-light max-w-[200px] mt-[70px] mx-auto w-full sm:text-[16px] text-[15px] uppercase text-center text-[#102840] border-[#102840] border-[0.5px] sm:py-4 py-[9px] px-0 mb-[20px] hover:bg-[#102840] hover:text-white active:bg-[#6d849a] active:text-white"
       >
         <router-link
           to="/market"
-          class="font-light w-full text-[16px] uppercase text-center text-[#102840] py-4 px-0 mb-[20px]"
+          class="font-light w-full text-[16px] uppercase text-center  py-4 px-0 mb-[20px]"
           >Детальніше</router-link
         >
       </div>
@@ -93,6 +98,142 @@
         class="w-1/2 sm:h-[400px] h-[185px] object-cover"
       />
     </section>
+
+    <!-- КОЛЕКЦІЯ 2024  2 -->
+    <section class="sm:py-[90px] py-[35px] px-4 max-w-6xl mx-auto">
+      <h2
+        class="font-light sm:text-[36px] text-[16px] text-[#252525] sm:mb-[50px] mb-[30px]"
+      >
+        {{ returnData?.swiperItems2?.Title }}
+      </h2>
+
+      <!-- Навигационные стрелки -->
+      <div class="relative">
+        <Swiper
+          class="product-swiper"
+          :modules="[SwiperNavigation, SwiperPagination]"
+          :navigation="{
+            prevEl: '.custom-prev',
+            nextEl: '.custom-next',
+          }"
+          :pagination="{
+            el: '.swiper-pagination',
+            clickable: true,
+          }"
+          loop
+          :spaceBetween="20"
+          :breakpoints="{
+            320: { slidesPerView: 2 },
+            640: { slidesPerView: 2 },
+            1024: { slidesPerView: 4 },
+          }"
+        >
+          <SwiperSlide
+            v-for="(product, index) in returnData?.swiperItems?.products"
+            :key="index"
+          >
+            <ProductCard :data="product" />
+          </SwiperSlide>
+        </Swiper>
+
+        <!-- Стрелки -->
+        <div class="swiper-pagination sm:hidden" />
+        <button
+          class="custom-prev absolute ml:flex hidden top-[40%] left-[-25px] z-10 -translate-y-1/2"
+        >
+          <img src="/prev.svg" alt="prev" />
+        </button>
+        <button
+          class="custom-next absolute ml:flex hidden top-[40%] right-[-25px] z-10 -translate-y-1/2"
+        >
+          <img src="/next.svg" alt="next" />
+        </button>
+      </div>
+
+      <!-- Кнопка -->
+      <div
+        class="font-light max-w-[200px] mt-[70px] mx-auto w-full sm:text-[16px] text-[15px] uppercase text-center text-[#102840] border-[#102840] border-[0.5px] sm:py-4 py-[9px] px-0 mb-[20px] hover:bg-[#102840] hover:text-white active:bg-[#6d849a] active:text-white"
+      >
+        <router-link
+          to="/market"
+          class="font-light w-full text-[16px] uppercase text-center  py-4 px-0 mb-[20px]"
+          >Детальніше</router-link
+        >
+      </div>
+    </section>
+    <section class="flex flex-wrap">
+      <img
+        v-for="(img, index) in returnData?.images?.image"
+        :key="index"
+        :src="`${img.url}`"
+        alt="item"
+        class="w-1/2 sm:h-[400px] h-[185px] object-cover"
+      />
+    </section>
+    
+    <!-- КОЛЕКЦІЯ 2024 3 -->
+    <section class="sm:py-[90px] py-[35px] px-4 max-w-6xl mx-auto">
+      <h2
+        class="font-light sm:text-[36px] text-[16px] text-[#252525] sm:mb-[50px] mb-[30px]"
+      >
+        {{ returnData?.swiperItems3?.Title }}
+      </h2>
+
+      <!-- Навигационные стрелки -->
+      <div class="relative">
+        <Swiper
+          class="product-swiper"
+          :modules="[SwiperNavigation, SwiperPagination]"
+          :navigation="{
+            prevEl: '.custom-prev',
+            nextEl: '.custom-next',
+          }"
+          :pagination="{
+            el: '.swiper-pagination',
+            clickable: true,
+          }"
+          loop
+          :spaceBetween="20"
+          :breakpoints="{
+            320: { slidesPerView: 2 },
+            640: { slidesPerView: 2 },
+            1024: { slidesPerView: 4 },
+          }"
+        >
+          <SwiperSlide
+            v-for="(product, index) in returnData?.swiperItems?.products"
+            :key="index"
+          >
+            <ProductCard :data="product" />
+          </SwiperSlide>
+        </Swiper>
+
+        <!-- Стрелки -->
+        <div class="swiper-pagination sm:hidden" />
+        <button
+          class="custom-prev absolute ml:flex hidden top-[40%] left-[-25px] z-10 -translate-y-1/2"
+        >
+          <img src="/prev.svg" alt="prev" />
+        </button>
+        <button
+          class="custom-next absolute ml:flex hidden top-[40%] right-[-25px] z-10 -translate-y-1/2"
+        >
+          <img src="/next.svg" alt="next" />
+        </button>
+      </div>
+
+      <!-- Кнопка -->
+      <div
+        class="font-light max-w-[200px] mt-[70px] mx-auto w-full sm:text-[16px] text-[15px] uppercase text-center text-[#102840] border-[#102840] border-[0.5px] sm:py-4 py-[9px] px-0 mb-[20px] hover:bg-[#102840] hover:text-white active:bg-[#6d849a] active:text-white"
+      >
+        <router-link
+          to="/market"
+          class="font-light w-full text-[16px] uppercase text-center  py-4 px-0 mb-[20px]"
+          >Детальніше</router-link
+        >
+      </div>
+    </section>
+
 
     <!-- ПОДПИСКА -->
     <section class="bg-white sm:py-[90px] py-[35px] px-4 text-center">
@@ -113,7 +254,7 @@
           {{ emailError }}
         </p>
         <button
-          class="font-light w-full text-[16px] uppercase text-center text-[#102840] border-[#102840] border-[0.5px] py-4 px-0 mb-[20px]"
+          class="font-light w-full text-[16px] uppercase text-center text-[#102840] border-[#102840] border-[0.5px] py-4 px-0 mb-[20px] hover:bg-[#102840] hover:text-white active:bg-[#6d849a] active:text-white"
         >
           ПІДПИСАТИСЯ
         </button>

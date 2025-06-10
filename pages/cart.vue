@@ -375,7 +375,7 @@
 
         <button
           @click="submitOrder"
-          class="border border-[#102840] w-full py-3 text-[#102840] uppercase text-[14px] font-light tracking-wide mt-[15px]"
+          class="border border-[#102840] w-full py-3 text-[#102840] uppercase text-[14px] font-light tracking-wide mt-[15px] hover:bg-[#102840] hover:text-white active:bg-[#6d849a] active:text-white"
         >
           Оформити замовлення
         </button>
