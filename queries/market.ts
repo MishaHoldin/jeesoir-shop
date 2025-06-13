@@ -61,4 +61,13 @@ query($products: ID!)
   }
 }
 `
-export { products, getProduct, getProductSize };
+const searchProducts = gql`
+  query($name: String!) {
+    products(filters: { Name: { containsi: $name } }, pagination: { limit: 10 }) {
+      documentId
+      Name
+    }
+  }
+`;
+
+export { products, getProduct, getProductSize, searchProducts };

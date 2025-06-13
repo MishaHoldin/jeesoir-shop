@@ -380,12 +380,18 @@
           Оформити замовлення
         </button>
 
-        <!-- Ошибка -->
+        <!-- Ошибка только одно сообщение за раз -->
         <div
-          v-if="errors.name"
+          v-if="errors.name || errors.surname || errors.email || errors.phone || errors.city || errors.office || errors.delivery"
           class="text-red-500 text-[14px] text-center mt-2 font-light"
         >
-          *Введіть Ваше ім’я
+          <span v-if="errors.name">{{ errors.name }}</span>
+          <span v-else-if="errors.surname">{{ errors.surname }}</span>
+          <span v-else-if="errors.email">{{ errors.email }}</span>
+          <span v-else-if="errors.phone">{{ errors.phone }}</span>
+          <span v-else-if="errors.city">{{ errors.city }}</span>
+          <span v-else-if="errors.office">{{ errors.office }}</span>
+          <span v-else-if="errors.delivery">{{ errors.delivery }}</span>
         </div>
 
         <div class="text-center text-[14px] underline text-[#102840] mt-[80px]">
@@ -403,12 +409,15 @@ import { getProductSize } from "~/queries/market";
 const sizeMap = ref({});
 
 const errors = reactive({
-  name: false,
-  email: false,
-  phone: false,
-  city: false,
-  delivery: false,
+  name: '',
+  surname: '',
+  email: '',
+  phone: '',
+  city: '',
+  office: '',
+  delivery: '',
 });
+
 
 const fetchSizes = async (productId) => {
   const { execute, data } = useLazyAsyncQuery(getProductSize, {
@@ -438,11 +447,41 @@ const form = reactive({
 });
 
 function submitOrder() {
-  if (!form.name || !form.email || !form.delivery || !form.payment) {
+  // Сброс ошибок
+  for (const key in errors) {
+    errors[key] = '';
+  }
+
+  if (!form.name) {
+    errors.name = '*Введіть Ваше ім’я';
+    return;
+  }
+  if (!form.surname) {
+    errors.surname = '*Введіть Ваше прізвище';
+    return;
+  }
+  if (!form.email) {
+    errors.email = '*Введіть Ваш e-mail';
+    return;
+  }
+  if (!form.phone) {
+    errors.phone = '*Введіть Ваш телефон';
+    return;
+  }
+  if (!form.city) {
+    errors.city = '*Введіть Ваше місто';
+    return;
+  }
+  if (!form.office) {
+    errors.office = '*Введіть Ваше відділення пошти';
+    return;
+  }
+  if (!form.delivery) {
+    errors.delivery = '*Оберіть спосіб доставки';
     return;
   }
 
-  console.log("Order submitted:", form, cart.items);
-  // можеш здесь вызвать API для backend
+  console.log('✅ Order submitted:', form, cart.items);
 }
+
 </script>

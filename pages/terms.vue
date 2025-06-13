@@ -1,5 +1,5 @@
 <template>
-  <div class="terms-page max-w-[1440px] mx-auto px-4 pt-[90px] mb-[130px]">
+  <div class="terms-page max-w-[1060px] mx-auto px-4 pt-[90px] mb-[130px]">
     <Markdown :src="returnData" />
   </div>
 </template>
@@ -17,14 +17,15 @@ onMounted(async () => {
 
 <style lang="scss">
 .terms-page {
-  font-family: "raleway";
+  @apply font-raleway;
+
   color: #000;
 
   h1 {
     font-weight: 500;
     font-size: 36px;
     color: #102840;
-    margin-bottom: 24px;
+    margin-bottom: 50px;
   }
 
   h2 {
@@ -32,7 +33,7 @@ onMounted(async () => {
     font-size: 32px;
     color: #102840;
     margin-top: 32px;
-    margin-bottom: 16px;
+    margin-bottom: 40px;
   }
 
   p {
@@ -47,6 +48,18 @@ onMounted(async () => {
     font-size: 24px;
     line-height: 150%;
     margin-bottom: 8px;
+  }
+  ul {
+    list-style-type: disc;
+    margin-left: 25px;
+  }
+
+  ul li {
+    margin-bottom: 30px;
+    font-weight: 300;
+    font-size: 24px;
+    line-height: 150%;
+    color: #000;
   }
 
   strong {

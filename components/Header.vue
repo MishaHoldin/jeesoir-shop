@@ -1,5 +1,13 @@
 <template>
-  <header class="w-full border-b border-gray-200 bg-white relative z-50">
+  <header
+    :class="[
+      'w-full z-50 transition-all duration-300 border-b',
+      isSticky ? 'fixed top-0 bg-white shadow-md' : 'relative bg-white'
+    ]"
+  >
+
+  
+
     <div
       class="max-w-[1440px] mx-auto px-4 pt-[14px] pb-[20px] flex justify-between items-center"
     >
@@ -25,20 +33,38 @@
             
             <!-- Иконки -->
             <div class="flex w-full items-center justify-end gap-4">
-              <div class="flex flex-grow max-w-[700px] sm:mx-4 sm:ml-0 ml-[10px] border border-gray-300">
-                <div class="sm:flex hidden items-center px-3">
-                  <img src="/search.svg" alt="search" class="w-4 h-4" />
+              <div class="relative flex-grow max-w-[700px] sm:mx-4 sm:ml-0 ml-[10px]">
+                <div class="flex border border-gray-300 rounded-t-md overflow-hidden">
+                  <div class="sm:flex hidden items-center px-3">
+                    <img src="/search.svg" alt="search" class="w-4 h-4" />
+                  </div>
+                  <input
+                    v-model="searchQuery"
+                    type="text"
+                    placeholder="Пошук..."
+                    class="flex-grow py-2 px-2 font-light text-[18px] text-[#252525] outline-none w-full"
+                  />
+                  <button class="bg-[#102840] font-light text-[18px] text-white px-4 py-2 sm:max-w-[120px] max-w-[90px] w-full">
+                    Пошук
+                  </button>
                 </div>
-                <input
-                  v-model="searchQuery"
-                  type="text"
-                  placeholder="Пошук..."
-                  class="flex-grow py-2 px-2 font-light text-[18px] text-[#252525] outline-none w-full"
-                />
-                <button class="bg-[#102840] font-light text-[18px] text-white px-4 py-2 sm:max-w-[120px] max-w-[90px] w-full">
-                  Пошук
-                </button>
+              
+                <!-- Выпадающий список -->
+                <ul
+                  v-if="searchResults.length && searchQuery"
+                  class="absolute left-0 right-0 top-full border-x border-b border-gray-300 bg-white z-50 rounded-b-md shadow-md max-h-[300px] overflow-y-auto"
+                >
+                  <li
+                    v-for="item in searchResults"
+                    :key="item.documentId"
+                    class="px-4 py-2 hover:bg-gray-100 cursor-pointer text-[#252525]"
+                    @click="goToProduct(item.documentId)"
+                  >
+                    {{ item.Name }}
+                  </li>
+                </ul>
               </div>
+              
               <img alt="profile" src="/profile.svg" class="w-5 h-5" />
               <img alt="heart" src="/heart.svg" class="w-5 h-5" />
               <router-link to="/cart">
@@ -149,17 +175,30 @@
 </template>
 
 <script setup>
+import { searchProducts } from '@/queries/market';
 const menuOpen = ref(false);
 const currencyStore = useCurrencyStore()
 const showCurrencyDropdown = ref(false)
 const loginModalOpen = ref(false)
-
 const showSearch = ref(false)
 const searchQuery = ref('')
 const currencies = ['UAH', 'USD', 'EUR']
 
 function toggleCurrencyDropdown() {
   showCurrencyDropdown.value = !showCurrencyDropdown.value
+}
+const isSticky = ref(false);
+
+onMounted(() => {
+  window.addEventListener("scroll", handleScroll);
+});
+
+onBeforeUnmount(() => {
+  window.removeEventListener("scroll", handleScroll);
+});
+
+function handleScroll() {
+  isSticky.value = window.scrollY > 100; // изменить значение по желанию
 }
 
 function selectCurrency(curr) {
@@ -181,6 +220,35 @@ function toggleSearchBar() {
   showSearch.value = !showSearch.value
 }
 
+const searchResults = ref([]);
+const loadingSearch = ref(false);
+const router = useRouter();
+
+watch(searchQuery, async (newQuery) => {
+  if (!newQuery || newQuery.length < 2) {
+    searchResults.value = [];
+    return;
+  }
+
+  loadingSearch.value = true;
+  try {
+    const { onResult } = useQuery(searchProducts, { name: newQuery });
+    onResult((res) => {
+      searchResults.value = res.data?.products || [];
+      loadingSearch.value = false;
+    });
+  } catch (e) {
+    console.error('Search error', e);
+    loadingSearch.value = false;
+  }
+});
+
+function goToProduct(documentId) {
+  router.push(`/product/${documentId}`);
+  showSearch.value = false;
+  searchQuery.value = '';
+  searchResults.value = [];
+}
 
 </script>
 

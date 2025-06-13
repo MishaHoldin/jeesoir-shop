@@ -40,6 +40,7 @@
         <button class="btn-style mb-4" @click="handleLogin">Увійти</button>
         <button
           class="btn-style flex items-center justify-center mx-auto gap-2"
+          @click="loginWithGoogle"
         >
           <img src="/google.svg" alt="google" />
         </button>
@@ -134,6 +135,10 @@ onLoginDone(({ data }) => {
     step.value = 'success'
   }
 })
+const loginWithGoogle = () => {
+  const redirectUri = 'https://8188-31-148-20-67.ngrok-free.app/connect/google'
+  window.location.href = redirectUri
+}
 
 // -----------------------------
 // REGISTER
