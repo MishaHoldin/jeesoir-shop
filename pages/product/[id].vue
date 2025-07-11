@@ -63,16 +63,11 @@
 
             <div class="flex gap-2 flex-wrap">
               <button
-                v-for="size in product?.sizes"
-                :key="size.Name"
-                @click="selectedSize = size.Name"
-                :class="[
-                  'px-4 py-2 text-sm font-[300] text-center border',
-                  selectedSize === size.Name
-                    ? 'bg-black text-white border-black'
-                    : 'bg-[#d9d9d9] text-[#4d4d4d] hover:bg-gray-100',
-                ]"
-              >
+              v-for="size in sortedSizes"
+              :key="size.Name"
+              @click="selectedSize = size.Name"
+              :class="[ selectedSize === size.Name ? 'bg-black text-white border-black' : 'bg-[#d9d9d9] text-[#4d4d4d] hover:bg-gray-100', 'px-4 py-2 text-sm font-[300] text-center border']"
+            >
                 {{ size.Name }}
               </button>
             </div>
@@ -92,7 +87,7 @@
         </div>
         <div class="sm:flex hidden flex-col gap-[16px] mb-[30px]">
           <div
-            class="w-[32px] h-[32px] rounded-full border border-[#252525] flex flex-col items-center justify-center"
+            class="w-[32px] h-[32px] rounded-full  flex flex-col items-center justify-center"
           >
             <div
               class="w-[24px] h-[24px] rounded-full"
@@ -108,21 +103,20 @@
         <div class="mb-[34px] sm:block hidden">
           <button
             @click="sizeChartOpen = true"
-            class="font-extralight text-[20px] underline decoration-[#252525] decoration-1 underline-offset-0 text-[#252525] mb-[22px]"
+            class="font-extralight text-[20px]  decoration-[#252525] decoration-1 text-[#252525] mb-[22px]"
           >
             Розмірна сітка
           </button>
-
           <div class="flex gap-2">
             <button
-              v-for="size in product?.sizes"
+              v-for="size in sortedSizes"
               :key="size.Name"
               @click="selectedSize = size.Name"
               :class="[
-                'px-4 py-2 text-sm font-[300] text-center border',
+                'px-4 py-2 text-sm font-[300] text-center border hover:bg-[#102840] hover:text-white',
                 selectedSize === size.Name
-                  ? 'bg-black text-white border-black'
-                  : 'bg-[#d9d9d9] text-[#4d4d4d] hover:bg-gray-100',
+                  ? 'bg-[#102840] text-white border-black'
+                  : 'bg-[#d9d9d9] text-[#4d4d4d] ',
               ]"
             >
               {{ size.Name }}
@@ -197,14 +191,15 @@
         v-if="isModalOpen"
         class="fixed inset-0 bg-black bg-opacity-80 flex justify-center items-center z-50"
       >
-        <button
-          class="absolute top-5 right-5 text-white text-3xl"
+
+
+        <div class="relative w-full max-w-3xl px-4">
+          <button
+          class="absolute top-0 right-[6%] text-black text-3xl"
           @click="closeModal"
         >
           ×
         </button>
-
-        <div class="relative w-full max-w-3xl px-4">
           <img
             :src="`${product?.images?.[modalImageIndex]?.url}`"
             class="w-full h-auto object-contain max-h-[80vh] mx-auto"
@@ -214,18 +209,24 @@
             @click="prevImage"
             class="absolute left-0 top-1/2 transform -translate-y-1/2 px-4 text-white text-3xl"
           >
-            ‹
+          <svg width="61" height="61" viewBox="0 0 61 61" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <ellipse opacity="0.1" cx="29.8762" cy="29.9763" rx="29.8762" ry="29.9763" transform="matrix(-1 0 0 1 60.6523 0.523438)" fill="#102840" />
+            <path d="M35.1765 20.0273L24.7401 30.4997L35.1765 40.9715" stroke="white" stroke-width="2" />
+          </svg>
           </button>
           <button
             @click="nextImage"
             class="absolute right-0 top-1/2 transform -translate-y-1/2 px-4 text-white text-3xl"
           >
-            ›
+          <svg width="61" height="61" viewBox="0 0 61 61" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <ellipse opacity="0.1" cx="29.8762" cy="29.9763" rx="29.8762" ry="29.9763" transform="matrix(1 1.75431e-07 1.74262e-07 -1 0.398438 60.4756)" fill="#102840" />
+            <path d="M25.8735 40.9707L36.3099 30.4984L25.8735 20.0266" stroke="white" stroke-width="2" />
+          </svg>
           </button>
         </div>
       </div>
     </div>
-    <section
+    <!-- <section
       class="sm:py-[130px] py-[35px] px-4 max-w-[1440px] mx-auto"
       v-show="product?.same_product"
     >
@@ -233,7 +234,7 @@
         Вам може сподобатися
       </h2>
 
-      <!-- Навигационные стрелки -->
+
       <div class="relative">
         <Swiper
           class="product-swiper"
@@ -262,7 +263,6 @@
           </SwiperSlide>
           <div class="swiper-pagination sm:hidden mt-10" />
         </Swiper>
-        <!-- Стрелки -->
         <button
           class="custom-prev absolute ml:flex hidden top-1/2 left-[-25px] z-10 -translate-y-1/2"
         >
@@ -274,10 +274,8 @@
           <img src="/next.svg" alt="next" />
         </button>
       </div>
-    </section>
-    <!-- Modal: Розмірна сітка -->
+    </section> -->
 
-    <!-- Сайдбар "Розмірна сітка" -->
     <transition name="slide">
       <aside
         v-if="sizeChartOpen"
@@ -383,4 +381,19 @@ function handleAddToCart() {
   });
   window.location.href = "/cart";
 }
+
+const sizeOrder = ['XXS', 'XS', 'S', 'M', 'L', 'XL', 'XXL', '3XL', '4XL'];
+
+const sortedSizes = computed(() => {
+  const sizes = product.value?.sizes;
+  if (!sizes) return [];
+  return [...sizes].sort((a, b) => {
+    const aIndex = sizeOrder.indexOf(a.Name.toUpperCase());
+    const bIndex = sizeOrder.indexOf(b.Name.toUpperCase());
+    return (aIndex === -1 ? Infinity : aIndex) - (bIndex === -1 ? Infinity : bIndex);
+  });
+});
+
+
+
 </script>

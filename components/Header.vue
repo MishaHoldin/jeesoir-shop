@@ -44,8 +44,11 @@
                     placeholder="Пошук..."
                     class="flex-grow py-2 px-2 font-light text-[18px] text-[#252525] outline-none w-full"
                   />
-                  <button class="bg-[#102840] font-light text-[18px] text-white px-4 py-2 sm:max-w-[120px] max-w-[90px] w-full">
+                  <button class="bg-[#102840] font-light text-[18px] text-white px-4 py-2 sm:max-w-[120px] max-w-[90px] w-full sm:flex hidden">
                     Пошук
+                  </button>
+                  <button @click="toggleSearchBar" class="font-light text-[18px] text-[#000] max-w-[40px] px-4 py-2  w-full">
+                    Х
                   </button>
                 </div>
               
@@ -150,20 +153,43 @@
         <nav class="flex flex-col gap-3 sm:text-[24px] text-[16px] font-light leading-none">
           <!-- Текущая страница выделена чёрным -->
           <router-link
-            to="/"
-            class="text-[#252525]"
-            @click="closeMenu"
-          >Головна</router-link>
+          to="/"
+          :class="route.path === '/' ? 'text-[#252525]' : 'text-[#797979] hover:text-[#252525]'"
+          @click="closeMenu"
+        >Головна</router-link>
+        
+        <router-link
+          to="/market"
+          :class="route.path.startsWith('/market') ? 'text-[#252525]' : 'text-[#797979] hover:text-[#252525]'"
+          @click="closeMenu"
+        >Каталог</router-link>
+        
 
-          <router-link to="/market" class="text-[#797979] hover:text-[#252525]" @click="closeMenu">Каталог</router-link>
+        
 
           <!-- Разделитель -->
           <hr class="my-4 w-[95px] h-[1px] bg-[#797979] border-none" />
 
-          <router-link to="/cart" class="text-[#797979] hover:text-[#252525]" @click="closeMenu">Кошик</router-link>
-          <router-link to="/wishlist" class="text-[#797979] hover:text-[#252525]" @click="closeMenu">Обране</router-link>
+          <router-link
+          to="/cart"
+          :class="route.path === '/cart' ? 'text-[#252525]' : 'text-[#797979] hover:text-[#252525]'"
+          @click="closeMenu"
+        >Кошик</router-link>
+          <router-link
+          to="/wishlist"
+          :class="route.path === '/wishlist' ? 'text-[#252525]' : 'text-[#797979] hover:text-[#252525]'"
+          @click="closeMenu"
+        >Обране</router-link>
+
           <router-link to="/" class="text-[#797979] hover:text-[#252525]" @click="closeMenu">Замовлення</router-link>
-          <router-link to="/return" class="text-[#797979] hover:text-[#252525]" @click="closeMenu">Повернення</router-link>
+          <router-link
+            to="/return"
+            :class="route.path === '/return' ? 'text-[#252525]' : 'text-[#797979] hover:text-[#252525]'"
+            @click="closeMenu"
+          >
+            Повернення
+          </router-link>
+
           <router-link to="/" class="text-[#797979] hover:text-[#252525]" @click="closeMenu">Про нас</router-link>
         </nav>
       </aside>
@@ -183,6 +209,7 @@ const loginModalOpen = ref(false)
 const showSearch = ref(false)
 const searchQuery = ref('')
 const currencies = ['UAH', 'USD', 'EUR']
+const route = useRoute();
 
 function toggleCurrencyDropdown() {
   showCurrencyDropdown.value = !showCurrencyDropdown.value
