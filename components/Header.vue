@@ -190,7 +190,9 @@
             Повернення
           </router-link>
 
-          <router-link to="/" class="text-[#797979] hover:text-[#252525]" @click="closeMenu">Про нас</router-link>
+          <router-link to="/contacts" 
+          :class="route.path === '/contacts' ? 'text-[#252525]' : 'text-[#797979] hover:text-[#252525]'"
+          class="text-[#797979] hover:text-[#252525]" @click="closeMenu">Про нас</router-link>
         </nav>
       </aside>
     </transition>

@@ -32,7 +32,7 @@
         class="flex justify-center gap-[5px] mt-[5px] text-[16px] font-light text-[#252525]/50"
       >
         <span
-          v-for="size in data.sizes"
+          v-for="size in sortedSizes"
           :key="size.Name"
           class="uppercase"
         >
@@ -59,4 +59,16 @@ const isFavorite = computed(() => wishlist.items.includes(props.data.documentId)
 const toggleFavorite = () => {
   wishlist.toggle(props.data.documentId);
 };
+
+const sizeOrder = ['XS', 'S', 'M', 'L', 'XL', 'XXL'];
+
+// Отсортированные размеры
+const sortedSizes = computed(() => {
+  if (!props.data?.sizes) return [];
+  return [...props.data.sizes].sort((a, b) => {
+    const indexA = sizeOrder.indexOf(a.Name.toUpperCase());
+    const indexB = sizeOrder.indexOf(b.Name.toUpperCase());
+    return indexA - indexB;
+  });
+});
 </script>
