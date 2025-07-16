@@ -27,19 +27,6 @@
       <div class="font-bold sm:text-[16px] text-[13px] text-[#252525] mt-[5px]">
         {{ data?.price }}€
       </div>
-      <div
-        v-if="['/market', '/wishlist'].includes(route.path)"
-        class="flex justify-center gap-[5px] mt-[5px] text-[16px] font-light text-[#252525]/50"
-      >
-        <span
-          v-for="size in sortedSizes"
-          :key="size.Name"
-          class="uppercase"
-        >
-          {{ size.Name }}
-        </span>
-      </div>
-    
     </router-link>
   </div>
 </template>

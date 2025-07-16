@@ -21,7 +21,7 @@
               :src="`${product?.images?.[activeImage]?.url}`"
               @click="openModal(0)"
               class="
-              sm:max-w-[448px]  min-w-[160px] sm:max-h-[541px] h-auto min-h-[240px] 
+              sm:max-w-[448px]  min-w-[160px] sm:max-h-[541px] h-auto min-h-[285px] 
               w-full object-cover cursor-pointer"
               alt="product"
             />
@@ -66,7 +66,9 @@
               v-for="size in sortedSizes"
               :key="size.Name"
               @click="selectedSize = size.Name"
-              :class="[ selectedSize === size.Name ? 'bg-black text-white border-black' : 'bg-[#d9d9d9] text-[#4d4d4d] hover:bg-gray-100', 'px-4 py-2 text-sm font-[300] text-center border']"
+              :class="[selectedSize === size.Name ?
+                'bg-black text-white border-black' : 'bg-[#ffffff] text-[#4d4d4d] hover:bg-gray-100 border border-[#000]',
+                'px-4 py-2 text-sm font-[300] text-center border']"
             >
                 {{ size.Name }}
               </button>
@@ -113,10 +115,10 @@
               :key="size.Name"
               @click="selectedSize = size.Name"
               :class="[
-                'px-4 py-2 text-sm font-[300] text-center border hover:bg-[#102840] hover:text-white',
+                'px-4 py-2 text-sm font-[300] text-center border border-[#000] hover:bg-[#102840] hover:text-white',
                 selectedSize === size.Name
                   ? 'bg-[#102840] text-white border-black'
-                  : 'bg-[#d9d9d9] text-[#4d4d4d] ',
+                  : 'bg-[#ffffff] text-[#4d4d4d] ',
               ]"
             >
               {{ size.Name }}
@@ -279,7 +281,7 @@
     <transition name="slide">
       <aside
         v-if="sizeChartOpen"
-        class="fixed top-0 right-0 w-[80%] h-full bg-white z-50 shadow-lg overflow-auto"
+        class="fixed top-0 right-0 sm:w-[80%] w-screen h-full bg-white z-50 shadow-lg overflow-auto"
       >
         <!-- Верхняя панель -->
         <div
@@ -302,15 +304,90 @@
               />
             </svg>
           </button>
-          <h2 class="font-[300] text-[36px] text-black">Розмірна сітка</h2>
+          <h2 class="font-[300] sm:text-[36px] text-[16px] text-black">Розмірна сітка</h2>
           <div class="w-6 h-6"></div>
           <!-- пустота для выравнивания -->
         </div>
 
-        <!-- Таблица -->
-        <div class="p-6 overflow-x-auto">
-          <NuxtImg provider="strapi" :src="product?.sizeTable?.url" alt="" />
+        <!-- Таблица с табами -->
+        <div class="sm:p-6 overflow-x-auto">
+          <!-- Табы переключения -->
+          <div class="flex justify-end mb-4">
+            <button
+              class="px-4 py-2 border text-sm"
+              :class="unit === 'cm' ? 'bg-[#102840] text-white' : 'bg-white text-[#252525]'"
+              @click="unit = 'cm'"
+            >
+              CM
+            </button>
+            <button
+              class="px-4 py-2 border text-sm"
+              :class="unit === 'inch' ? 'bg-[#102840] text-white' : 'bg-white text-[#252525]'"
+              @click="unit = 'inch'"
+            >
+              Inch
+            </button>
+          </div>
+
+          <!-- Таблица в см -->
+          <table
+            v-if="unit === 'cm'"
+            class="w-full border-collapse border text-sm text-left text-[#252525]"
+          >
+            <thead>
+              <tr>
+                <th class="border px-3 py-2">UA</th>
+                <th class="border px-3 py-2">EU (IT)</th>
+                <th class="border px-3 py-2">EU (FR)</th>
+                <th class="border px-3 py-2">Розмір</th>
+                <th class="border px-3 py-2">Груди</th>
+                <th class="border px-3 py-2">Талія</th>
+                <th class="border px-3 py-2">Стегна</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="row in cmTable" :key="row.ua">
+                <td class="border px-3 py-2">{{ row.ua }}</td>
+                <td class="border px-3 py-2">{{ row.euIt }}</td>
+                <td class="border px-3 py-2">{{ row.euFr }}</td>
+                <td class="border px-3 py-2">{{ row.size }}</td>
+                <td class="border px-3 py-2">{{ row.bust }}</td>
+                <td class="border px-3 py-2">{{ row.waist }}</td>
+                <td class="border px-3 py-2">{{ row.hips }}</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <!-- Таблица в дюймах -->
+          <table
+            v-else
+            class="w-full border-collapse border text-sm text-left text-[#252525]"
+          >
+            <thead>
+              <tr>
+                <th class="border px-3 py-2">UA</th>
+                <th class="border px-3 py-2">EU (IT)</th>
+                <th class="border px-3 py-2">EU (FR)</th>
+                <th class="border px-3 py-2">Розмір</th>
+                <th class="border px-3 py-2">Груди</th>
+                <th class="border px-3 py-2">Талія</th>
+                <th class="border px-3 py-2">Стегна</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="row in inchTable" :key="row.ua">
+                <td class="border px-3 py-2">{{ row.ua }}</td>
+                <td class="border px-3 py-2">{{ row.euIt }}</td>
+                <td class="border px-3 py-2">{{ row.euFr }}</td>
+                <td class="border px-3 py-2">{{ row.size }}</td>
+                <td class="border px-3 py-2">{{ row.bust }}</td>
+                <td class="border px-3 py-2">{{ row.waist }}</td>
+                <td class="border px-3 py-2">{{ row.hips }}</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
+
       </aside>
     </transition>
   </div>
@@ -394,6 +471,27 @@ const sortedSizes = computed(() => {
   });
 });
 
+const unit = ref("cm"); // 'cm' или 'inch'
+
+const cmTable = [
+  { ua: "38", euIt: "34", euFr: "30", size: "XXS", bust: 81, waist: 61, hips: 87 },
+  { ua: "40", euIt: "36", euFr: "32", size: "XS", bust: 84, waist: 64, hips: 91 },
+  { ua: "42", euIt: "38", euFr: "34", size: "S", bust: 88, waist: 68, hips: 95 },
+  { ua: "44", euIt: "40", euFr: "36", size: "M", bust: 92, waist: 72, hips: 99 },
+  { ua: "46", euIt: "42", euFr: "38", size: "L", bust: 96, waist: 76, hips: 103 },
+  { ua: "48", euIt: "44", euFr: "40", size: "XL", bust: 100, waist: 84, hips: 107 },
+  { ua: "50", euIt: "46", euFr: "42", size: "XXL", bust: 104, waist: 85, hips: 111 },
+];
+
+const inchTable = [
+  { ua: "38", euIt: "34", euFr: "30", size: "XXS", bust: 31.9, waist: 24.0, hips: 34.3 },
+  { ua: "40", euIt: "36", euFr: "32", size: "XS", bust: 33.1, waist: 25.6, hips: 35.8 },
+  { ua: "42", euIt: "38", euFr: "34", size: "S", bust: 34.6, waist: 27.2, hips: 37.4 },
+  { ua: "44", euIt: "40", euFr: "36", size: "M", bust: 36.2, waist: 28.7, hips: 39.0 },
+  { ua: "46", euIt: "42", euFr: "38", size: "L", bust: 37.8, waist: 30.3, hips: 40.6 },
+  { ua: "48", euIt: "44", euFr: "40", size: "XL", bust: 39.4, waist: 31.9, hips: 42.1 },
+  { ua: "50", euIt: "46", euFr: "42", size: "XXL", bust: 40.9, waist: 33.5, hips: 43.7 },
+];
 
 
 </script>
