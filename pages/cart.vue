@@ -13,7 +13,7 @@
       <div
         v-for="item in cart.items"
         :key="item.id + '-' + item.size"
-        class="border-b py-4 flex justify-between items-center"
+        class="border-b py-4 flex justify-between items-center w-full"
       >
         <div class="flex gap-4 items-start">
           <img
@@ -31,7 +31,7 @@
               </div>
             </div>
             <div
-              class="sm:pt-[30px] pt-[5px] font-[300] text-[14px] text-[#102840]"
+              class="sm:pt-[30px] pt-[5px] font-[300] text-[14px] text-[#102840] text-start"
             >
               {{ item.productNumber }}
             </div>
@@ -92,7 +92,7 @@
           </div>
         </div>
         <div
-          class="w-[32px] h-[32px] rounded-full border border-[#252525] flex-col items-center justify-center sm:flex hidden"
+          class="w-[32px] h-[32px] rounded-full  flex-col items-center justify-center sm:flex hidden"
         >
           <div
             class="w-[24px] h-[24px] rounded-full"

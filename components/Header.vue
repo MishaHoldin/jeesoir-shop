@@ -118,12 +118,20 @@
         <!-- <router-link to="/">
           <img alt="profile" src="/profile.svg" class="sm:w-6 sm:h-6 w-3 h-3" />
         </router-link> -->
-        <router-link to="/wishlist">
+        <router-link to="/wishlist" class="relative">
           <img alt="heart" src="/heart.svg" class="sm:w-6 sm:h-6 w-3 h-3" />
+          <span v-if="wishlist.items.length" class="absolute -bottom-[-4px] -left-1 bg-[#FF6D6D] text-white text-xs rounded-full sm:w-[12px] w-[8px] sm:h-[12px] h-[8px] flex items-center justify-center">
+            {{ wishlist.items.length }}
+          </span>
         </router-link>
-        <router-link to="/cart">
+
+        <router-link to="/cart" class="relative">
           <img alt="cart" src="/cart.svg" class="sm:w-6 sm:h-6 w-3 h-3" />
+          <span v-if="cart.totalCount" class="absolute -bottom-[-4px] -left-1 bg-[#FF6D6D] text-white text-xs rounded-full sm:w-[12px] w-[8px] sm:h-[12px] h-[8px] flex items-center justify-center">
+            {{ cart.totalCount }}
+          </span>
         </router-link>
+
         
       </div>
     </div>
@@ -212,6 +220,10 @@ const showSearch = ref(false)
 const searchQuery = ref('')
 const currencies = ['UAH', 'USD', 'EUR']
 const route = useRoute();
+import { useCartStore } from '@/stores/cart';
+import { useWishlistStore } from '@/stores/wishlist';
+const cart = useCartStore();
+const wishlist = useWishlistStore();
 
 function toggleCurrencyDropdown() {
   showCurrencyDropdown.value = !showCurrencyDropdown.value
