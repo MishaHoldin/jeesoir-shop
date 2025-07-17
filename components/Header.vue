@@ -68,7 +68,7 @@
                 </ul>
               </div>
               
-              <img alt="profile" src="/profile.svg" class="w-5 h-5" />
+              <!-- <img alt="profile" src="/profile.svg" class="w-5 h-5" /> -->
               <img alt="heart" src="/heart.svg" class="w-5 h-5" />
               <router-link to="/cart">
                 <img alt="cart" src="/cart.svg" class="w-5 h-5" />
@@ -115,9 +115,9 @@
         <button @click="toggleSearchBar">
           <img alt="search" src="/search.svg" class="sm:w-6 sm:h-6 w-3 h-3" />
         </button>
-        <router-link to="/">
+        <!-- <router-link to="/">
           <img alt="profile" src="/profile.svg" class="sm:w-6 sm:h-6 w-3 h-3" />
-        </router-link>
+        </router-link> -->
         <router-link to="/wishlist">
           <img alt="heart" src="/heart.svg" class="sm:w-6 sm:h-6 w-3 h-3" />
         </router-link>
