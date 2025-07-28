@@ -19,7 +19,7 @@
         </h1>
         <router-link
           :to="returnData?.banner?.btnLink"
-          class="font-medium sm:text-[16px] text-[10px] uppercase text-end text-white new_block"
+          class="font-medium sm:text-[16px] text-[10px] uppercase text-end text-white new_block underline"
         >
           {{ returnData?.banner?.btnText }}
         </router-link>
@@ -65,14 +65,14 @@
         </Swiper>
 
         <!-- Стрелки -->
-        <div class="swiper-pagination sm:hidden" />
+        <div class="swiper-pagination" />
         <button
-          class="custom-prev absolute ml:flex hidden top-[40%] left-[-25px] z-10 -translate-y-1/2"
+          class="custom-prev absolute flex sm:top-[40%] top-[35%] sm:left-[-25px] left-[-10px] z-10 -translate-y-1/2"
         >
           <img src="/prev.svg" alt="prev" />
         </button>
         <button
-          class="custom-next absolute ml:flex hidden top-[40%] right-[-25px] z-10 -translate-y-1/2"
+          class="custom-next absolute flex sm:top-[40%] top-[35%] sm:right-[-25px] right-[-10px] z-10 -translate-y-1/2"
         >
           <img src="/next.svg" alt="next" />
         </button>
@@ -137,14 +137,14 @@
         </Swiper>
 
         <!-- Стрелки -->
-        <div class="swiper-pagination sm:hidden" />
+        <div class="swiper-pagination" />
         <button
-          class="custom-prev absolute ml:flex hidden top-[40%] left-[-25px] z-10 -translate-y-1/2"
+          class="custom-prev absolute flex sm:top-[40%] top-[35%] sm:left-[-25px] left-[-10px] z-10 -translate-y-1/2"
         >
           <img src="/prev.svg" alt="prev" />
         </button>
         <button
-          class="custom-next absolute ml:flex hidden top-[40%] right-[-25px] z-10 -translate-y-1/2"
+          class="custom-next absolute flex sm:top-[40%] top-[35%] sm:right-[-25px] right-[-10px] z-10 -translate-y-1/2"
         >
           <img src="/next.svg" alt="next" />
         </button>
@@ -209,14 +209,14 @@
         </Swiper>
 
         <!-- Стрелки -->
-        <div class="swiper-pagination sm:hidden" />
+        <div class="swiper-pagination" />
         <button
-          class="custom-prev absolute ml:flex hidden top-[40%] left-[-25px] z-10 -translate-y-1/2"
+          class="custom-prev absolute flex sm:top-[40%] top-[35%] sm:left-[-25px] left-[-10px] z-10 -translate-y-1/2"
         >
           <img src="/prev.svg" alt="prev" />
         </button>
         <button
-          class="custom-next absolute ml:flex hidden top-[40%] right-[-25px] z-10 -translate-y-1/2"
+          class="custom-next absolute flex sm:top-[40%] top-[35%] sm:right-[-25px] right-[-10px] z-10 -translate-y-1/2"
         >
           <img src="/next.svg" alt="next" />
         </button>

@@ -80,12 +80,11 @@
       
 
 
-<!-- Иконки -->
-<div class="flex items-center sm:gap-[30px] gap-[10px]">
+      <div class="flex items-center sm:gap-[30px] gap-[10px]">
         <div class="relative ml-[80px]">
           <button
             @click="toggleCurrencyDropdown"
-            class="flex items-center gap-1 font-light text-[18px] text-[#252525] pb-[2px]"
+            class="flex items-center gap-1 font-light sm:text-[18px] text-[14px] text-[#252525] sm:pb-[2px]"
           >
             {{ currencyStore.selectedCurrency }}
             <img
@@ -113,21 +112,21 @@
         
         
         <button @click="toggleSearchBar">
-          <img alt="search" src="/search.svg" class="sm:w-6 sm:h-6 w-3 h-3" />
+          <img alt="search" src="/search.svg" class="sm:w-6 sm:h-6 w-4 h-4" />
         </button>
         <!-- <router-link to="/">
-          <img alt="profile" src="/profile.svg" class="sm:w-6 sm:h-6 w-3 h-3" />
+          <img alt="profile" src="/profile.svg" class="sm:w-6 sm:h-6 w-4 h-4" />
         </router-link> -->
         <router-link to="/wishlist" class="relative">
-          <img alt="heart" src="/heart.svg" class="sm:w-6 sm:h-6 w-3 h-3" />
-          <span v-if="wishlist.items.length" class="absolute -bottom-[-4px] -left-1 bg-[#FF6D6D] text-white text-xs rounded-full sm:w-[12px] w-[8px] sm:h-[12px] h-[8px] flex items-center justify-center">
+          <img alt="heart" src="/heart.svg" class="sm:w-6 sm:h-6 w-4 h-4" />
+          <span v-if="wishlist.items.length" class="absolute -bottom-[-4px] -left-1 bg-[#FF6D6D] text-white text-xs rounded-full sm:w-[12px] w-[10px] sm:h-[12px] h-[10px] flex items-center justify-center">
             {{ wishlist.items.length }}
           </span>
         </router-link>
 
         <router-link to="/cart" class="relative">
-          <img alt="cart" src="/cart.svg" class="sm:w-6 sm:h-6 w-3 h-3" />
-          <span v-if="cart.totalCount" class="absolute -bottom-[-4px] -left-1 bg-[#FF6D6D] text-white text-xs rounded-full sm:w-[12px] w-[8px] sm:h-[12px] h-[8px] flex items-center justify-center">
+          <img alt="cart" src="/cart.svg" class="sm:w-6 sm:h-6 w-4 h-4" />
+          <span v-if="cart.totalCount" class="absolute -bottom-[-4px] -left-1 bg-[#FF6D6D] text-white text-xs rounded-full sm:w-[12px] w-[10px] sm:h-[12px] h-[10px] flex items-center justify-center">
             {{ cart.totalCount }}
           </span>
         </router-link>
@@ -200,7 +199,7 @@
 
           <router-link to="/contacts" 
           :class="route.path === '/contacts' ? 'text-[#252525]' : 'text-[#797979] hover:text-[#252525]'"
-          class="text-[#797979] hover:text-[#252525]" @click="closeMenu">Про нас</router-link>
+           @click="closeMenu">Контакти</router-link>
         </nav>
       </aside>
     </transition>

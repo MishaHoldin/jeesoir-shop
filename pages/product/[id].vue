@@ -135,9 +135,10 @@
             У КОШИК
           </button>
           <button
+             @click.stop="toggleFavorite"
             class="border border-[#102840] border-[0.5px] px-[81px] pt-[16px] pb-[17px] font-light text-[16px] uppercase text-center text-[#102840] w-full hover:bg-[#102840] hover:text-white active:bg-[#6d849a] active:text-white"
           >
-            В ОБРАНЕ
+            {{ isFavorite ? 'В ОБРАНЕ' : 'ПРИБРАТИ З ОБРАНОГО' }}
           </button>
         </div>
         <router-link
@@ -395,6 +396,8 @@
 
 <script setup>
 import { getProduct } from "~/queries/market";
+import { useWishlistStore } from '~/stores/wishlist';
+const wishlist = useWishlistStore();
 
 const route = useRoute();
 const id = route.params.id;
@@ -493,5 +496,11 @@ const inchTable = [
   { ua: "50", euIt: "46", euFr: "42", size: "XXL", bust: 40.9, waist: 33.5, hips: 43.7 },
 ];
 
+
+const isFavorite = computed(() => wishlist.items.includes(id));
+
+const toggleFavorite = () => {
+  wishlist.toggle(id);
+};
 
 </script>
