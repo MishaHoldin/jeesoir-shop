@@ -404,8 +404,11 @@
             <span v-else-if="errors.delivery">{{ errors.delivery }}</span>
           </div>
   
-          <div class="text-center text-[14px] underline text-[#102840] mt-[80px]">
+          <div class="text-center text-[14px] underline text-[#102840] mt-[35px]">
             Увійти до особистого кабінету
+          </div>
+          <div class="text-center text-[14px] underline text-[#102840] mt-[20px]">
+            Зареєструватися
           </div>
         </div>
       </div>
