@@ -34,7 +34,7 @@
             {{ product?.Name }}
           </h1>
           <div class="font-bold sm:hidden flex text-[16px] text-[#252525] mb-4">
-            {{ product?.price }} €
+            {{ product?.price }} 
           </div>
           <div
             class="sm:hidden flex flex-col sm:gap-[16px] gap-[10px] sm:mb-[30px] mb-[15px]"
@@ -85,7 +85,7 @@
           {{ product?.Name }}
         </h1>
         <div class="font-bold sm:flex hidden text-[16px] text-[#252525] mb-4">
-          {{ product?.price }} €
+          {{ product?.price }} 
         </div>
         <div class="sm:flex hidden flex-col gap-[16px] mb-[30px]">
           <div

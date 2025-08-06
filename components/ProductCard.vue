@@ -25,7 +25,7 @@
 
       <!-- Цена -->
       <div class="font-bold sm:text-[16px] text-[13px] text-[#252525] mt-[5px]">
-        {{ data?.price }}€
+        {{ data?.price }}
       </div>
     </router-link>
   </div>
